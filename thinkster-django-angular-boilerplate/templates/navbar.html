@@ -35,24 +35,36 @@
                 <h4 class="modal-title">Advance Search</h4>
               </div>
               <div class="modal-body">
-                <div class="well">
+                
                   <form role="form" ng-submit="">
+                    <div class="well">
+                      <div class="form-group">
+                        <label for="search__author">Author(s)</label>
+                        <input type="text" class="form-control" id="search__author" ng-model="search.author" placeholder="e.g. J.K. Rowlins, Donald Trump"/>
+                      </div>
 
-                    <div class="form-group">
-                      <label for="search__author">Username</label>
-                      <input type="text" class="form-control" id="search__author" ng-model="search.author" placeholder="ex. booklover"/>
+                      <div class="form-group">
+                        <label for="search__publisher">Publisher</label>
+                        <input type="text" class="form-control" id="search__publisher" ng-model="search.publisher" placeholder="e.g. SUTD Publishing"/>
+                      </div>
+
+                      <div class="form-group">
+                        <label for="search__title">Title</label>
+                        <input type="text" class="form-control" id="search__title" ng-model="search.title" placeholder="e.g. How to Code 101"/>
+                      </div>
+
+                      <div class="form-group">
+                        <label for="search__subject">Subject</label>
+                        <input type="text" class="form-control" id="search__subject" ng-model="search.subject" placeholder="e.g. computing"/>
+                      </div>
+
+                    
                     </div>
-
                     <div class="form-group">
-                      <label for="search__publisher">Password</label>
-                      <input type="text" class="form-control" id="search__publisher" ng-model="search.publisher" placeholder="e.g. book123"/>
-                    </div>
-
-                    <div class="form-group">
-                      <button type="submit" class="btn btn-primary">Search</button>
+                      <button type="submit" class="btn btn-primary pull-right">Search</button>
                     </div>
                   </form>
-                </div>
+                
               </div>
               <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -68,7 +80,7 @@
       <ul class="nav navbar-nav pull-right">
         {% if user.is_authenticated %}
           <li><a href="/+{{ user.username }}">+{{ user.username }}</a></li>
-          <li><a href="/+{{ user.username }}/settings">Settings</a></li>
+          <li><a href="/+{{ user.username }}/my_account">My Account</a></li>
           <li><a href="javascript:void(0)" ng-click="vm.logout()">Logout</a></li>
         {% else %}
           <li><a href="/login">Login</a></li>
