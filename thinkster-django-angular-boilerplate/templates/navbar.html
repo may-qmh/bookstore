@@ -1,0 +1,80 @@
+<nav class="navbar navbar-default" role="navigation" ng-controller="NavbarController as vm">
+  <div class="container-fluid ">
+    <div class="navbar-header navbar-static-top">
+      <button type="button" class="navbar-toggle collapsed navbar-fixed-top" data-toggle="collapse" data-target="#not-google-plus-nav">
+        <span class="sr-only">Toggle Navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand navbar-fixed-top" href="#"><img id="logo" alt="B&amp;N" src="../../static/images/b&amp;n.png"></a>
+      <!--form class="navbar-form navbar-left" role="search">
+        <div class="form-group">
+          <input type="text" class="form-control" placeholder="Enter book search here...">
+        </div>
+        <button type="submit" class="btn btn-default">Search</button>
+      </form-->
+              
+        <div class="btn-group btn-group-sm navbar-fixed-bottom">
+          <!-- Buttons -->
+          <div class="btn-group">
+          <input type="text" class="form-control" placeholder="Enter book search here..."></div>
+          <button type="button" id="search" class="btn btn-default glyphicon glyphicon-search down aria-label="Left Align"">            
+          </button>
+          <button type="button" id="advancesearch" class="btn btn-link" data-toggle="modal" data-target="#myModal">
+          Advanced Search
+          </button>
+        </div>
+        <div id="myModal" class="modal fade" role="dialog">
+          <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Advance Search</h4>
+              </div>
+              <div class="modal-body">
+                <div class="well">
+                  <form role="form" ng-submit="">
+
+                    <div class="form-group">
+                      <label for="search__author">Username</label>
+                      <input type="text" class="form-control" id="search__author" ng-model="search.author" placeholder="ex. booklover"/>
+                    </div>
+
+                    <div class="form-group">
+                      <label for="search__publisher">Password</label>
+                      <input type="text" class="form-control" id="search__publisher" ng-model="search.publisher" placeholder="e.g. book123"/>
+                    </div>
+
+                    <div class="form-group">
+                      <button type="submit" class="btn btn-primary">Search</button>
+                    </div>
+                  </form>
+                </div>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      
+    </div> <!-- ./navbar-header -->
+
+    <div class="collapse navbar-collapse">
+      <ul class="nav navbar-nav pull-right">
+        {% if user.is_authenticated %}
+          <li><a href="/+{{ user.username }}">+{{ user.username }}</a></li>
+          <li><a href="/+{{ user.username }}/settings">Settings</a></li>
+          <li><a href="javascript:void(0)" ng-click="vm.logout()">Logout</a></li>
+        {% else %}
+          <li><a href="/login">Login</a></li>
+          <li><a href="/register">Register</a></li>
+        {% endif %}
+      </ul>
+    </div> <!-- /.collapse.navbar-collapse -->
+  </div> <!-- /.container-fluid -->
+</nav>

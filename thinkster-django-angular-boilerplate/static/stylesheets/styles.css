@@ -1,0 +1,40 @@
+#logo {
+	border-radius:10px 10px 10px 10px;
+	background-repeat: no-repeat;
+	width: 55px;
+	height:auto;
+
+}
+
+.logo{
+	width: 50px;
+}
+
+.navbar .navbar-nav {
+    padding-top: 10px;
+    padding-bottom: 15px;
+}
+
+.navbar-default {
+    border-color: #E7E7E7;
+    background: #e3d6a5; /* For browsers that do not support gradients */
+    background: -webkit-linear-gradient(#e3d6a5, #b6ad89); /* For Safari 5.1 to 6.0 */
+    background: -o-linear-gradient(#e3d6a5, #b6ad89); /* For Opera 11.1 to 12.0 */
+    background: -moz-linear-gradient(#e3d6a5, #b6ad89); /* For Firefox 3.6 to 15 */
+    background: linear-gradient(#e3d6a5, #b6ad89); /* Standard syntax */
+}
+
+.btn-default {
+    color: white  !important;
+}
+
+.btn-group{
+	margin:10px !important;
+	box-shadow: none !important;
+}
+#search{
+    margin-top:12px !important;
+}
+#advancesearch{
+	margin-top:13px !important;
+}
