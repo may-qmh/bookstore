@@ -20,7 +20,7 @@
   	return ShareVar;
 
     function search_books(author,publisher,bk_title,subject) {
-      return $http.post('/api/v1/search/',{
+      return $http.post('/search/',{
         author: author,
         publisher: publisher,
         bk_title: bk_title,

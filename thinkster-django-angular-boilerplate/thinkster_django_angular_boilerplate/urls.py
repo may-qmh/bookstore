@@ -4,8 +4,9 @@ from django.conf.urls import patterns, url, include
 
 from thinkster_django_angular_boilerplate.views import IndexView
 
-from authentication.views import LoginView, LogoutView, SearchView
+from authentication.views import LoginView, LogoutView
 
+from books.views import SearchView, HomeView
 # .. Imports
 from rest_framework_nested import routers
 
@@ -23,7 +24,9 @@ urlpatterns = patterns(
 
     url(r'^api/v1/auth/logout/$', LogoutView.as_view(), name='logout'),   
 
-    url(r'^api/v1/search/$', SearchView.as_view(), name='search_books'),
+    url(r'^search/$', SearchView.as_view(), name='search_books'),
+	
+	#url(r'^api/v1/home/$', HomeView.as_view(), name='home_page'),
 
     url('^.*$', IndexView.as_view(), name='index')
 )

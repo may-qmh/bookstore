@@ -43,3 +43,19 @@
     color:white !important;
 }
 
+#homepage{
+    height:560px;
+    width:100%;
+    bottom:60px;
+}
+.shelve{
+    
+    background-image: url("../images/shelves.jpg");
+    background-repeat: no-repeat;
+    background-size: 80% 170%;
+    background-position: center bottom;
+}
+
+body{
+    background-color: #E0F1FC !important;
+}
