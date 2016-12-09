@@ -9,12 +9,12 @@
     .module('thinkster.authentication.controllers')
     .controller('RegisterController', RegisterController);
 
-  RegisterController.$inject = ['$location', '$scope', 'Authentication', 'ShareVar'];
+  RegisterController.$inject = ['$location', '$scope', 'Authentication'];
 
   /**
   * @namespace RegisterController
   */
-  function RegisterController($location, $scope, Authentication, ShareVar) {
+  function RegisterController($location, $scope, Authentication) {
     var vm = this;
 
     vm.register = register;

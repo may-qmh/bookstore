@@ -31,36 +31,32 @@
               </div>
               <div class="modal-body">
                 
-                  <form role="form" ng-submit="">
+                  <form role="form" ng-submit="vm.search_books()">
                     <div class="well">
                       <div class="form-group">
-                        <label for="search__author">Author(s)</label>
-
-                          
-                          <input type="text" class="form-control" id="search__author" ng-model="search.author" placeholder="e.g. J.K. Rowlins, Donald Trump"/>
-
-                                                
+                        <label for="search__author">Author(s)</label>                          
+                          <input type="text" class="form-control" id="search__author" ng-model="vm.author" placeholder="e.g. J.K. Rowlins, Donald Trump"/>                                                
                       </div>
 
                       <div class="form-group">
                         <label for="search__publisher">Publisher</label>
 
 
-                          <input type="text" class="form-control" id="search__publisher" ng-model="search.publisher" placeholder="e.g. SUTD Publishing"/>
+                          <input type="text" class="form-control" id="search__publisher" ng-model="vm.publisher" placeholder="e.g. SUTD Publishing"/>
 
                         </div>
 
                       <div class="form-group">
                         <label for="search__title">Title</label>
 
-                          <input type="text" class="form-control" id="search__title" ng-model="search.title" placeholder="e.g. How to Code 101"/>
+                          <input type="text" class="form-control" id="search__title" ng-model="vm.bk_title" placeholder="e.g. How to Code 101"/>
 
                       </div>
 
                       <div class="form-group">
                         <label for="search__subject">Subject</label>
 
-                          <input type="text" class="form-control" id="search__subject" ng-model="search.subject" placeholder="e.g. computing"/>
+                          <input type="text" class="form-control" id="search__subject" ng-model="vm.subject" placeholder="e.g. computing"/>
               
 
                       </div>

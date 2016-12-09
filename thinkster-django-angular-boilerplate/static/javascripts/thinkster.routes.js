@@ -20,6 +20,10 @@
       controller: 'LoginController',
       controllerAs: 'vm',
       templateUrl: '/static/templates/authentication/login.html'
+    }).when('/search', {
+      controller: 'NavbarController',
+      controllerAs: 'vm',
+      templateUrl: '/static/templates/authentication/search.html'
     }).otherwise('/');
 
     

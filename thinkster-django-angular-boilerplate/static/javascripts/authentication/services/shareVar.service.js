@@ -9,18 +9,37 @@
     .module('thinkster.authentication.services')
     .factory('ShareVar',ShareVar);
 
-  function ShareVar(){
-  	var irs = {};
+  ShareVar.$inject = ['$http'];
 
-  	function setRValue(value){
-  		angular.copy(value,irs)
-  	}
+  function ShareVar($http){
 
-  	var shareVar = {
-  		setRValue: setRValue,
-  		isRegisterSuccess: irs
+  	var ShareVar = {
+      search_books:search_books
   	};
   	
-  	return shareVar;
+  	return ShareVar;
+
+    function search_books(author,publisher,bk_title,subject) {
+      return $http.post('/api/v1/search/',{
+        author: author,
+        publisher: publisher,
+        bk_title: bk_title,
+        subject: subject
+      }).then(searchSuccessFn, searchErrorFn);
+
+      function searchSuccessFn(data, status, headers, config) {
+        console.log("success")
+
+        window.location = '/search';
+      }
+
+      /**
+       * @name logoutErrorFn
+       * @desc Log "Epic failure!" to the console
+       */
+      function searchErrorFn(data, status, headers, config) {
+        console.error('Epic failure!');
+      }
+    }
   };
 })()

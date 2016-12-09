@@ -9,13 +9,13 @@
     .module('thinkster.authentication.services')
     .factory('Authentication', Authentication);
 
-  Authentication.$inject = ['$cookies', '$http', 'ShareVar'];
+  Authentication.$inject = ['$cookies', '$http'];
 
   /**
   * @namespace Authentication
   * @returns {Factory}
   */
-  function Authentication($cookies, $http, ShareVar) {
+  function Authentication($cookies, $http) {
     /**
     * @name Authentication
     * @desc The Factory to be returned
@@ -177,5 +177,7 @@
         console.error('Epic failure!');
       }
     }
+
+
   }
 })();
