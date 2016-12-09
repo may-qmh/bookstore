@@ -8,17 +8,12 @@
         <span class="icon-bar"></span>
       </button>
       <a class="navbar-brand navbar-fixed-top" href="#"><img id="logo" alt="B&amp;N" src="../../static/images/b&amp;n.png"></a>
-      <!--form class="navbar-form navbar-left" role="search">
-        <div class="form-group">
-          <input type="text" class="form-control" placeholder="Enter book search here...">
-        </div>
-        <button type="submit" class="btn btn-default">Search</button>
-      </form-->
+
               
         <div class="btn-group btn-group-sm navbar-fixed-bottom">
           <!-- Buttons -->
           <div class="btn-group">
-          <input type="text" class="form-control" placeholder="Enter book search here..."></div>
+          <input type="text" class="form-control white" placeholder="Enter book search here..."></div>
           <button type="button" id="search" class="btn btn-default glyphicon glyphicon-search down aria-label="Left Align"">            
           </button>
           <button type="button" id="advancesearch" class="btn btn-link" data-toggle="modal" data-target="#myModal">
@@ -32,7 +27,7 @@
             <div class="modal-content">
               <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title">Advance Search</h4>
+                <h4 class="modal-title">Advanced Search</h4>
               </div>
               <div class="modal-body">
                 
@@ -40,22 +35,34 @@
                     <div class="well">
                       <div class="form-group">
                         <label for="search__author">Author(s)</label>
-                        <input type="text" class="form-control" id="search__author" ng-model="search.author" placeholder="e.g. J.K. Rowlins, Donald Trump"/>
+
+                          
+                          <input type="text" class="form-control" id="search__author" ng-model="search.author" placeholder="e.g. J.K. Rowlins, Donald Trump"/>
+
+                                                
                       </div>
 
                       <div class="form-group">
                         <label for="search__publisher">Publisher</label>
-                        <input type="text" class="form-control" id="search__publisher" ng-model="search.publisher" placeholder="e.g. SUTD Publishing"/>
-                      </div>
+
+
+                          <input type="text" class="form-control" id="search__publisher" ng-model="search.publisher" placeholder="e.g. SUTD Publishing"/>
+
+                        </div>
 
                       <div class="form-group">
                         <label for="search__title">Title</label>
-                        <input type="text" class="form-control" id="search__title" ng-model="search.title" placeholder="e.g. How to Code 101"/>
+
+                          <input type="text" class="form-control" id="search__title" ng-model="search.title" placeholder="e.g. How to Code 101"/>
+
                       </div>
 
                       <div class="form-group">
                         <label for="search__subject">Subject</label>
-                        <input type="text" class="form-control" id="search__subject" ng-model="search.subject" placeholder="e.g. computing"/>
+
+                          <input type="text" class="form-control" id="search__subject" ng-model="search.subject" placeholder="e.g. computing"/>
+              
+
                       </div>
 
                     
@@ -79,9 +86,22 @@
     <div class="collapse navbar-collapse">
       <ul class="nav navbar-nav pull-right">
         {% if user.is_authenticated %}
-          <li><a href="/+{{ user.username }}">+{{ user.username }}</a></li>
-          <li><a href="/+{{ user.username }}/my_account">My Account</a></li>
-          <li><a href="javascript:void(0)" ng-click="vm.logout()">Logout</a></li>
+          {% if user.is_admin %}
+            <li><a href="/+{{user.is_admin}}">Store Info</a></li>
+          {% else %}
+            <li><a href="/+cart"><div class="glyphicon glyphicon-shopping-cart">Cart</div></a></li>
+          {% endif %}
+          <li role="presentation" class="dropdown"><a  class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" href="/+{{ user.username }}">+{{ user.username }} <span class="caret"></span></a>
+            <ul class="dropdown-menu dropdown-menu-right" >
+              <li><a href="/+{{ user.username }}/my_account">My Account</a></li>
+              <li><a href="javascript:void(0)" ng-click="vm.logout()">Logout</a></li>
+              <li><a href="#">Order History</a></li>
+              <li role="separator" class="divider"></li>
+              <li><a href="#">Separated link</a></li>
+            </ul>
+          </li>
+          
+
         {% else %}
           <li><a href="/login">Login</a></li>
           <li><a href="/register">Register</a></li>
