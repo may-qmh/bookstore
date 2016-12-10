@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+
+<html ng-app="thinkster">
+<head>
+  <title>thinkster-django-angular-boilerplate</title>
+
+  <base href="/" />
+
+  {% include 'stylesheets.html' %}
+</head>
+
+<body>
+  {% include 'navbar.html' %}
+  <div class="container">
+    <h3>{{bookinfo.title}}</h3>
+    <h5>by {{bookinfo.authors}}</h5>
+    <div class="row">
+		<div class="col-md-5"><img src="static/images/{{bookinfo.image}}" class="center"></div>
+		<div class="col-md-7">
+			<ul class="nav nav-tabs">
+			  <li class="active"><a data-toggle="tab" href="#home">Description</a></li>
+			  <li><a data-toggle="tab" href="#menu1">Reviews</a></li>
+			</ul>
+
+			<div class="tab-content">
+			  <div id="home" class="tab-pane fade in active topmarg">
+				<div class="row">
+				  <div class="col-md-3 tar">Subject:</div>
+				  <div class="col-md-8">{{bookinfo.subject}}</div>
+				</div>
+				<div class="row">
+				  <div class="col-md-3 tar">Format Available:</div>
+				  <div class="col-md-8">{{bookinfo.format}}</div>
+				</div>
+				<div class="row">
+				  <div class="col-md-3 tar">Year of Publication:</div>
+				  <div class="col-md-8">{{bookinfo.year}}</div>
+				</div>
+				<div class="row">
+				  <div class="col-md-3 tar">Published by:</div>
+				  <div class="col-md-8">{{bookinfo.publisher}}</div>
+				</div>
+				<div class="row">
+				  <div class="col-md-3 tar">ISBN:</div>
+				  <div class="col-md-8">{{bookinfo.isbn10}}</div>
+				</div>
+				<div class="row topmarg">
+					<div class="col-md-3 tar">About this book:</div>
+				</div>
+				<div class="row bb">
+					<div class="col-md-1"></div>
+					<div class="col-md-10 description">"<strong>{{bookinfo.title}}</strong> lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."</div>
+					
+				</div>
+				<div class="row topmarg">
+					<div class="col-md-7 tar">{{bookinfo.stock}} left in stock.</div>
+					<div class="col-md-2 tar">Price: ${{bookinfo.price}}0</div>
+					<div class="col-md-3">
+						<button type="button" id="checkout" class="btn glyphicon glyphicon-shopping-cart aria-label="Left Align""> ORDER NOW           
+          				</button>
+					</div>
+				</div>
+
+			  </div>
+			  <div id="menu1" class="tab-pane fade">
+			    <h3>Menu 1</h3>
+			    <p>Some content in menu 1.</p>
+			  </div>
+			</div>
+
+		</div>
+    </div>
+  </div>
+
+  {% include 'javascripts.html' %}
+</body>
+</html>

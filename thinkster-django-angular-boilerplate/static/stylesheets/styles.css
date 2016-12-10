@@ -59,3 +59,60 @@
 body{
     background-color: #E0F1FC !important;
 }
+
+.oc{
+  height: auto;
+  width: 17%;
+  margin: auto;
+}
+
+.nav-tabs {
+    background: transparent !important;
+}
+
+.nav-tabs > li > a {
+    color: black;
+    border: 3px black !important;
+    margin: 0;
+}
+
+.nav-tabs > li > a, .nav-tabs > li > a:hover, .nav-tabs > li > a:focus {
+        color: black;
+    border: 3px black !important;
+    margin: 0;
+
+    }
+.nav-tabs > li.active {
+    float: left;
+    margin-bottom: -1px;
+    border-top: 1px solid #ddd;
+    border-left: 1px solid #ddd;
+    border-right: 1px solid #ddd;
+    border-radius: 10px 10px 0px 0px;
+    margin-right: 3px;
+    background-color: rgba(255,255,255,0.5);
+}
+
+.tar{
+    text-align: right;
+}
+
+.topmarg{
+    margin-top: 5%
+}
+
+.description{
+    margin-top:1%;
+    text-align: justify;
+    margin-bottom: 5%
+}
+
+.bb{
+    border-bottom: 1px solid #ddd;
+}
+
+#checkout{
+    margin-top:-10px;
+    background-color: rgba(255,255,255,0.9);
+    border:1px solid #ddd;
+}

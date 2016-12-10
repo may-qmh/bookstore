@@ -14,7 +14,8 @@
   function ShareVar($http){
 
   	var ShareVar = {
-      search_books:search_books
+      search_books:search_books,
+      get_book_info:get_book_info
   	};
   	
   	return ShareVar;
@@ -31,6 +32,26 @@
         console.log("success")
 
         window.location = '/search';
+      }
+
+      /**
+       * @name logoutErrorFn
+       * @desc Log "Epic failure!" to the console
+       */
+      function searchErrorFn(data, status, headers, config) {
+        console.error('Epic failure!');
+      }
+    }
+
+    function get_book_info(isbn10) {
+      return $http.post('/book/'+isbn10,{
+        isbn10: isbn10
+      }).then(searchSuccessFn, searchErrorFn);
+
+      function searchSuccessFn(data, status, headers, config) {
+        console.log("success")
+
+        window.location = '/book/'+isbn10;
       }
 
       /**

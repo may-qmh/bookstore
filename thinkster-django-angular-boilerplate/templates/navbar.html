@@ -89,7 +89,7 @@
           {% endif %}
           <li role="presentation" class="dropdown"><a  class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" href="/+{{ user.username }}">+{{ user.username }} <span class="caret"></span></a>
             <ul class="dropdown-menu dropdown-menu-right" >
-              <li><a href="/+{{ user.username }}/my_account">My Account</a></li>
+              <li><a href="javascript:void(0)" ng-click="vm.check_account()">My Account</a></li>
               <li><a href="javascript:void(0)" ng-click="vm.logout()">Logout</a></li>
               <li><a href="#">Order History</a></li>
               <li role="separator" class="divider"></li>

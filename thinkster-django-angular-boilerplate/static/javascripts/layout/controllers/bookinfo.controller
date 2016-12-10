@@ -1,5 +1,5 @@
 /**
-* HomepageController
+* BookInfoController
 * @namespace thinkster.layout.controllers
 */
 (function () {
@@ -7,14 +7,14 @@
 
   angular
     .module('thinkster.layout.controllers')
-    .controller('HomepageController', HomepageController);
+    .controller('BookInfoController', BookInfoController);
 
-  HomepageController.$inject = ['$scope', 'ShareVar'];
+  BookInfoController.$inject = ['$scope', 'ShareVar'];
 
   /**
   * @namespace NavbarController
   */
-  function HomepageController($scope, ShareVar) {
+  function BookInfoController($scope, ShareVar) {
     $scope.select_book = select_book;
 
 

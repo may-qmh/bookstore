@@ -19,7 +19,7 @@
 
     vm.logout = logout;
     vm.search_books = search_books;
-
+    vm.check_account = check_account;
     /**
     * @name logout
     * @desc Log the user out
@@ -36,6 +36,11 @@
       var subject = vm.subject;
       console.log(ShareVar);
       ShareVar.search_books(vm.author,vm.publisher,vm.bk_title,vm.subject);
+    }
+
+    function check_account(username){
+      console.log("checking account");
+      Authentication.check_account(username);
     }
   }
 })();

@@ -27,7 +27,8 @@
       logout: logout,
       register: register,
       setAuthenticatedAccount: setAuthenticatedAccount,
-      unauthenticate: unauthenticate
+      unauthenticate: unauthenticate,
+      check_account: check_account
     };
 
     
@@ -177,6 +178,30 @@
         console.error('Epic failure!');
       }
     }
+    function check_account(username) {
+        
+        return $http.post('/account/'+username, {
+          username: username,
+        }).then(checkSuccessFn, checkErrorFn);
+
+        /**
+        * @name registerSuccessFn
+        * @desc Log the new user in
+        */
+        function checkSuccessFn(data, status, headers, config) {
+          console.log("success check");
+          window.location = '/account/'+username;
+        }
+
+        /**
+        * @name registerErrorFn
+        * @desc Log "Epic failure!" to the console
+        */
+        function checkErrorFn(data, status, headers, config) {
+          console.error('Epic failure!');
+
+        }
+      }
 
 
   }

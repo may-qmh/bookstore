@@ -16,22 +16,32 @@
     .when('/register', {
       controller: 'RegisterController', 
       controllerAs: 'vm',
-      templateUrl: '/static/templates/authentication/register.html'
+      templateUrl: 'static/templates/authentication/register.html'
     })
     .when('/login', {
       controller: 'LoginController',
       controllerAs: 'vm',
-      templateUrl: '/static/templates/authentication/login.html'
+      templateUrl: 'static/templates/authentication/login.html'
     })
     .when('/search', {
       controller: 'NavbarController',
       controllerAs: 'vm',
-      templateUrl: '/static/templates/books/search.html'
+      templateUrl: 'static/templates/books/search.html'
     })
     .when('/',{
       controller: 'HomepageController',
       controllerAs: 'vm',
-      templateUrl: '/static/templates/books/homepage.html'      
+      templateUrl: 'templates/homepage.html'      
+    })
+    .when('/book/',{
+      controller: 'BookInfoController',
+      controllerAs: 'vm',
+      templateUrl: 'templates/book_info.html'
+    })
+    .when('/account/',{
+      controller: 'UserInfoController',
+      controllerAs: 'vm',
+      templateUrl: 'templates/user_info.html'
     })
     .otherwise('/');
 

@@ -9,7 +9,7 @@ from authentication.models import Account
 from authentication.permissions import IsAccountOwner
 from authentication.serializers import AccountSerializer
 
-
+from django.shortcuts import render
 
 
 class AccountViewSet(viewsets.ModelViewSet):
@@ -74,3 +74,16 @@ class LogoutView(views.APIView):
 
         return Response({}, status=status.HTTP_204_NO_CONTENT)
 
+class UserView(views.APIView):
+    def post(self, request, format=None):
+        #logout(request)
+
+        return Response({}, status=status.HTTP_204_NO_CONTENT)
+
+    def get(self, request, username):
+        print "test bookview"
+
+        print username
+
+       #userinfo = Book.objects.get(pk=isbn10)
+        return render(request,'book_info.html',{'bookinfo':"test"}) 
