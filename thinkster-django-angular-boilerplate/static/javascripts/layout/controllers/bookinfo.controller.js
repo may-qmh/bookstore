@@ -15,13 +15,15 @@
   * @namespace NavbarController
   */
   function BookInfoController($scope, ShareVar) {
-    $scope.select_book = select_book;
+    $scope.order = order;
+    console.log("calling book info controller");
 
+    function order(isbn10){
+      console.log("function called");
+      var n = document.getElementById("quantity").value;
+      ShareVar.order_book(isbn10, n);
+      console.log(n)
 
-    function select_book(isbn10){
-      
-      ShareVar.get_book_info(isbn10);
-      console.error(typeof isbn10)
     }
 
   }

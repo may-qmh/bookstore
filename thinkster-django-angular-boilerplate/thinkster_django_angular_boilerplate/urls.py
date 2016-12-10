@@ -4,7 +4,7 @@ from thinkster_django_angular_boilerplate.views import IndexView
 
 from authentication.views import LoginView, LogoutView, UserView
 
-from books.views import SearchView, HomeView, BookView
+from books.views import SearchView, HomeView, BookView, ConfirmationView
 # .. Imports
 from rest_framework_nested import routers
 
@@ -29,6 +29,8 @@ urlpatterns = patterns(
 	url(r'^book/([a-zA-Z0-9-]+)$', BookView.as_view(), name='book_info'),
 
     url(r'^account/([a-zA-Z0-9-]+)$', UserView.as_view(), name='user_info'),
+
+    url(r'^confirmation/([a-zA-Z0-9-]+)$', ConfirmationView.as_view(), name='user_info'),
     
 	url(r'^$', HomeView.as_view(), name='home_page'),
 

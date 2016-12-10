@@ -28,9 +28,10 @@ class AccountManager(BaseUserManager):
 class Account(AbstractBaseUser):
     username = models.CharField(max_length=40, unique=True)
 
-    first_name = models.CharField(max_length=40, blank=True)
-    last_name = models.CharField(max_length=40, blank=True)
-    tagline = models.CharField(max_length=140, blank=True)
+    full_name = models.CharField(max_length=64, blank=True, null=True)
+    credit_card = models.CharField(max_length=16, blank=True, null=True)
+    address = models.CharField(max_length=256, blank=True, null=True)
+    phone = models.IntegerField(blank=True, null=True)
 
     is_admin = models.BooleanField(default=False)
 
@@ -44,9 +45,3 @@ class Account(AbstractBaseUser):
 
     def __unicode__(self):
         return self.username
-
-    def get_full_name(self):
-        return ' '.join([self.first_name, self.last_name])
-
-    def get_short_name(self):
-        return self.first_name

@@ -2,11 +2,13 @@
 from __future__ import unicode_literals
 
 from django.db import models, migrations
+from django.conf import settings
 
 
 class Migration(migrations.Migration):
 
     dependencies = [
+        migrations.swappable_dependency(settings.AUTH_USER_MODEL),
     ]
 
     operations = [
@@ -45,22 +47,6 @@ class Migration(migrations.Migration):
             bases=(models.Model,),
         ),
         migrations.CreateModel(
-            name='Customer',
-            fields=[
-                ('login_id', models.CharField(max_length=10, serialize=False, primary_key=True)),
-                ('full_name', models.CharField(max_length=64, null=True, blank=True)),
-                ('password', models.CharField(max_length=16, null=True, blank=True)),
-                ('credit_card', models.CharField(max_length=16, null=True, blank=True)),
-                ('address', models.CharField(max_length=256, null=True, blank=True)),
-                ('phone', models.IntegerField(null=True, blank=True)),
-            ],
-            options={
-                'db_table': 'customer',
-                'managed': True,
-            },
-            bases=(models.Model,),
-        ),
-        migrations.CreateModel(
             name='Feedback',
             fields=[
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
@@ -68,7 +54,7 @@ class Migration(migrations.Migration):
                 ('score', models.IntegerField(choices=[(1, 1), (2, 2), (3, 3), (4, 4), (5, 5), (6, 6), (7, 7), (8, 8), (9, 9)])),
                 ('opinion', models.CharField(max_length=256, null=True, blank=True)),
                 ('isbn10', models.ForeignKey(to='books.Book', db_column='isbn10')),
-                ('login', models.ForeignKey(to='books.Customer')),
+                ('login', models.ForeignKey(to=settings.AUTH_USER_MODEL)),
             ],
             options={
                 'db_table': 'feedback',
@@ -82,7 +68,7 @@ class Migration(migrations.Migration):
                 ('oid', models.IntegerField(serialize=False, primary_key=True)),
                 ('order_date', models.DateField(null=True, blank=True)),
                 ('order_status', models.CharField(blank=True, max_length=16, null=True, choices=[('processing', 'processing order'), ('transit', 'in transit'), ('delivered', 'delivered')])),
-                ('login', models.ForeignKey(blank=True, to='books.Customer', null=True)),
+                ('login', models.ForeignKey(blank=True, to=settings.AUTH_USER_MODEL, null=True)),
             ],
             options={
                 'db_table': 'order_history',
@@ -96,8 +82,8 @@ class Migration(migrations.Migration):
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
                 ('usefulness', models.IntegerField(choices=[(0, 0), (1, 1), (2, 2)])),
                 ('isbn10', models.ForeignKey(to='books.Feedback', db_column='isbn10')),
-                ('ratee', models.ForeignKey(related_name='ratee', to='books.Customer')),
-                ('rater', models.ForeignKey(related_name='rater', to='books.Customer')),
+                ('ratee', models.ForeignKey(related_name='ratee', to=settings.AUTH_USER_MODEL)),
+                ('rater', models.ForeignKey(related_name='rater', to=settings.AUTH_USER_MODEL)),
             ],
             options={
                 'db_table': 'usefulness_rating',

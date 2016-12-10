@@ -2,9 +2,9 @@ import json
 
 from rest_framework import status, views, permissions, viewsets
 from rest_framework.response import Response
-from books.models import Book, BookOrdered, Customer, Feedback, OrderHistory, UsefulnessRating
+from books.models import Book, BookOrdered, Feedback, OrderHistory, UsefulnessRating
 from django.shortcuts import render
-
+from rest_framework import status, views, permissions
 from django.contrib.staticfiles.templatetags.staticfiles import static
 
 class SearchView(views.APIView):
@@ -35,10 +35,14 @@ class BookView(views.APIView):
         data = json.loads(request.body)
 
         isbn10 = data.get('isbn10', None)
+        isbn10 = str(isbn10)
+        if len(isbn10)!=10:
+            diff = 10-len(isbn10)
+            isbn10="0"*diff+isbn10
         print "test post"
-        
         print isbn10
-        return Response({}, status=status.HTTP_204_NO_CONTENT)
+
+        return Response(status=status.HTTP_204_NO_CONTENT)
 
     def get(self, request, isbn10):
         print "test bookview"
@@ -49,4 +53,44 @@ class BookView(views.APIView):
             isbn10="0"*diff+isbn10
 
         bookinfo = Book.objects.get(pk=isbn10)
-        return render(request,'book_info.html',{'bookinfo':bookinfo})
+        feedback = Feedback.objects.filter(isbn10=isbn10)
+        fbnum = len(feedback)
+        return render(request,'book_info.html',{'bookinfo':bookinfo, 'feedback': feedback, 'fbnum': fbnum})
+
+class ConfirmationView(views.APIView):
+    permission_classes = (permissions.IsAuthenticated,)
+    def post(self, request, format=None):
+        data = json.loads(request.body)
+
+        isbn10 = data.get('isbn10', None)
+        isbn10 = str(isbn10)
+        if len(isbn10)!=10:
+            diff = 10-len(isbn10)
+            isbn10="0"*diff+isbn10
+        print "test confirm"
+        print isbn10
+       
+        username=request.user
+        
+        book = Book.objects.get(pk=isbn10)
+        ordered = long(data.get('n',None))
+        
+        book.stock = book.stock - ordered
+        book.save()
+        new_order = OrderHistory(login=username, order_status = 'processing')
+        new_order.save() 
+        book_ordered = BookOrdered(oid=new_order, isbn10 = book, quantity = ordered)
+        book_ordered.save()
+        return Response({}, status=status.HTTP_204_NO_CONTENT)
+
+    def get(self, request, isbn10):
+        print "test confirmationview"
+
+        isbn10 = str(isbn10)
+        print(isbn10)
+        if len(isbn10)!=10:
+            diff = 10-len(isbn10)
+            isbn10="0"*diff+isbn10
+
+        bookinfo = Book.objects.get(pk=isbn10)
+        return render(request,'confirmation.html',{bookinfo:bookinfo})

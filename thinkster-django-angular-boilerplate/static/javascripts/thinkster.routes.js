@@ -43,6 +43,11 @@
       controllerAs: 'vm',
       templateUrl: 'templates/user_info.html'
     })
+    .when('/confirmation/',{
+      controller: 'confirmationController',
+      controllerAs: 'vm',
+      templateUrl: 'templates/confirmation.html'
+    })
     .otherwise('/');
 
     

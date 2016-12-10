@@ -96,6 +96,9 @@ body{
 .tar{
     text-align: right;
 }
+.tac{
+    text-align: center;
+}
 
 .topmarg{
     margin-top: 5%
@@ -109,10 +112,42 @@ body{
 
 .bb{
     border-bottom: 1px solid #ddd;
+    padding-bottom: 5%;
 }
 
 #checkout{
     margin-top:-10px;
     background-color: rgba(255,255,255,0.9);
     border:1px solid #ddd;
+}
+
+.reviewer{
+    font-size: 0.8em;
+}
+
+.score{
+    font-weight: bold;
+    font-size: 1.2em;
+}
+
+.opinion{
+    margin-top:1%;
+}
+
+.tab-color{
+    background-color: rgba(255,255,255,0.4);
+    width: 100% !important;
+    height: 80% !important;
+}
+
+.scroll-review{
+    overflow-x: hidden;
+    overflow-y: auto;
+    height: 365px;
+}
+
+.nnum {
+    float:none !important;
+    width: 25px !important;
+
 }
