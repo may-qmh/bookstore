@@ -185,7 +185,7 @@ body{
 
 .ftable{
     margin-left:15px;
-    margin-right:15px;
+    margin-right:100px;
 }
 
 #add,#edit,#top, #new, #back, #up, #stats, #feedb{
@@ -231,3 +231,4 @@ body{
 .acc{
     height: 510px;
 }
+

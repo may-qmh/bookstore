@@ -1,5 +1,5 @@
 import json
-
+from django.http import Http404
 from rest_framework import status, views, permissions, viewsets
 from rest_framework.response import Response
 from books.models import Book, BookOrdered, Feedback, OrderHistory, UsefulnessRating
@@ -46,11 +46,13 @@ class BookView(views.APIView):
             isbn10 = request.POST['ISBN10']
             ratee = request.POST['rating_on']
             
-
+            bookinfo = Book.objects.get(pk=isbn10)
+            feedback2 = Feedback.objects.filter(isbn10=isbn10)
+            fbnum = len(feedback2)
         #not sure
             feedback = Feedback.objects.filter(login_id=ratee).get(isbn10=isbn10)
 
-            
+            form = UsefulnessForm()
 
             rating = UsefulnessRating(usefulness=score, rater=account[0], ratee=feedback.login, isbn10=feedback.isbn10)
         
@@ -59,11 +61,13 @@ class BookView(views.APIView):
                 rating.save()
                 #return HttpResponseRedirect('/books/' + feedback.book.isbn)
             except Exception as e:
+                #when rater = ratee OR when rater rates same feedback again
                 raise Http404('invalid')
+            return render(request,'book_info.html',{'bookinfo':bookinfo, 'feedback':feedback2, 'form':form, 'fbnum': fbnum})
         else:
             print "Usefulness form input invalid"
-
-        return render(request,'book_info.html',{})
+            return render(request,'book_info.html',{})
+        
 
     def get(self, request, isbn10):
         print "test bookview"

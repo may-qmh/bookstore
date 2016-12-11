@@ -122,42 +122,76 @@
 			  </div>
 
 			  <div id="fh" class="tab-pane fade">
-			  	<div>Feedback</div>
-				{% if feedbacks %}
-					{% for feedback, book in feedbacks %}
-						<div class="group">
-							<div>Feedback left on {{ feedback.entry_date }} for {{ book.title }}</div>
-							<div><b>Rating: {{ feedback.score }}</b></div>
-							<div>{{ feedback.opinion }}</div>
-						</div>
-					{% endfor %}
-				{% else %}
-				<div>You have no feedback!</div>
-				{% endif %}
-			  	
-			  </div>
+			  	<div class="leftmarg topmarg"><h1>Feedback</h1></div>
+			  	<div class="addtable smallmarg">
+				  	<table class="ftable">
+				  		<tr>
+				  			<th>S/N.</th>
+				  			<th>Date of Feedback</th>
+				  			<th>Book Title</th>
+				  			<th>Score Given</th>
+				  			<th>Your Feedback</th>
+				  		</tr>
+				  		{% if feedbacks %}
+							{% for feedback, book in feedbacks %}
+					  		<tr>
+								<td> </td>
+								<td>{{ feedback.entry_date }}</td>
+								<td>{{ book.title }}</td>
+								<td>{{ feedback.score }}</td>
+								<td>{{ feedback.opinion }}</td>
+							</tr>
+							{% endfor %}
+					</table>
+
+						
+						{% else %}
+						<div>You have no feedback!</div>
+						{% endif %}
+				  	
+				  </div>
+				</div>
+
 
 			   <div id="uh" class="tab-pane fade">
-					<div>Ratings</div>
-					{% if ratings %}
-						{% for rating, customer_ratee, book, feedback in ratings %}
-							<div class ="group">
-								<div>You left feedback on the book {{ book.title }}</div>
-								<div>Feedback belongs to user: {{ customer_ratee.name }}</div>
-								<div>who said: {{ feedback.opinion }}</div>
-								<div><b>Rating given: {{ rating.score }}</b></div>
-								{% if rating.score == 0 %}
-									<div>You thought this feedback was useless...</div>
-								{% elif rating.score == 1 %}
-									<div>You thought this feedback as average.</div>
-								{% else %}
-									<div>You thought this feedback was good!</div>
-								{% endif %}
-							</div>
-						{% endfor %}
-					{% else %}
-					<div>You have no rated feedback.</div>
-					{% endif %}			  	
+					<div class="leftmarg topmarg"><h1>Ratings</h1></div>
+					<div class="addtable smallmarg">
+					  	<table class="ftable">
+					  		<tr>
+					  			<th>S/N.</th>
+					  			<th>You Rated a Feedback On Book Titled</th>
+					  			<th>Feedback From</th>
+					  			<th>Feedback</th>
+					  			<th>Usefulness Rating Given</th>
+					  			<th>Your Rating On This</th>
+					  		</tr>
+					  		{% if ratings %}
+								{% for rating, customer_ratee, book, feedback in ratings %}
+						  		<tr>
+									<td> </td>
+									<td>{{ book.title }}</td>
+									<td>{{ customer_ratee.username }}</td>
+									<td>{{ feedback.opinion }}</td>
+									<td>{{ rating.usefulness }}</td>
+									{% if rating.usefulness == 0 %}
+										<td>You thought this feedback was useless...</td>
+									{% elif rating.usefulness == 1 %}
+										<td>You thought this feedback was average.</td>
+									{% else %}
+										<td>You thought this feedback was good!</td>
+									{% endif %}
+								</tr>
+								{% endfor %}
+						</table>
+
+							
+							{% else %}
+							<div>You have no rated feedback!</div>
+							{% endif %}
+					  	
+					  </div>
+					
+								  	
 			  	
 			  </div>
 			</div>

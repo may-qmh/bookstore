@@ -90,7 +90,7 @@ class UsefulnessRating(models.Model):
         (2,2)
     )
     usefulness = models.IntegerField(choices=usefulnesschoices)
-    isbn10 = models.ForeignKey(Feedback, db_column='isbn10')
+    isbn10 = models.ForeignKey(Book, db_column='isbn10')
 
     class Meta:
         managed = True
