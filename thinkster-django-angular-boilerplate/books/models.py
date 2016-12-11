@@ -2,14 +2,15 @@ from __future__ import unicode_literals
 from django.db import models
 from django.core.exceptions import ValidationError
 from authentication.models import Account
+from django.core.validators import RegexValidator, MinValueValidator
 class Book(models.Model):
-    isbn10 = models.CharField(primary_key=True, max_length=10)
+    isbn10 = models.CharField(validators=[RegexValidator(regex='^.{10}$', message='Length has to be 10', code='nomatch')],primary_key=True, max_length=10)
     title = models.CharField(max_length=256)
     authors = models.CharField(max_length=256, blank=True, null=True)
     publisher = models.CharField(max_length=64, blank=True, null=True)
     year = models.IntegerField(blank=True, null=True)
     stock = models.IntegerField()
-    price = models.FloatField(blank=True, null=True)
+    price = models.FloatField(validators = [MinValueValidator(0.0)],blank=True,default=0.0)
     formatchoices = (
         ('hardcover', 'hardcover'),
         ('paperback', 'paperback')
@@ -49,7 +50,7 @@ class BookOrdered(models.Model):
 
 class Feedback(models.Model):
     entry_date = models.DateField(auto_now_add=True, null=True)
-    scorechoices = zip(range(1,10), range(1,10))
+    scorechoices = zip(range(0,11), range(0,11))
     score = models.IntegerField(choices=scorechoices)
     opinion = models.CharField(max_length=256, blank=True, null=True)
     login = models.ForeignKey(Account,to_field='username')
@@ -64,7 +65,7 @@ class Feedback(models.Model):
 class OrderHistory(models.Model):
     oid = models.AutoField(primary_key=True)
     login = models.ForeignKey(Account,to_field='username', blank=True, null=True)
-    order_date = models.DateField(blank=True, null=True)
+    order_date = models.DateField(auto_now_add=True,blank=True, null=True)
     statuschoices = (
         ('processing', 'processing order'),
         ('transit', 'in transit'),

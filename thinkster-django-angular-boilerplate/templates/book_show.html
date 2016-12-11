@@ -1,0 +1,41 @@
+{%block content%}
+	<table>
+		<tr>
+			<th> isbn10	 </th>
+			<th> title </th>
+			<th> authors </th>
+			<th> publisher </th>	
+			<th> year </th>
+			<th> stock </th>
+			<th> price </th>
+			<th> format </th>
+			<th> keyword </th>
+			<th> subject </th>
+			
+		</tr>
+		{% for entry in data %}
+		<tr>
+			<td>{{entry.isbn10}}</td>
+			<td>{{entry.title}}</td>
+			<td>{{entry.authors}}</td>
+			<td>{{entry.publisher}}</td>
+			<td>{{entry.year}}</td>
+			<td>{{entry.stock}}</td>
+			<td>{{entry.price}}</td>
+			<td>{{entry.format}}</td>
+			<td>{{entry.keyword}}</td>
+			<td>{{entry.subject}}</td>
+
+		</tr>
+		{% endfor %}
+
+	</table>
+	
+	<p>
+	
+	<button onclick = "location.href='/addbook/new'"> Add new book </button>
+	<p>
+	<button onclick = "location.href='/addbook/edit'"> Edit book </button>
+	<p>
+	<button onclick = "location.href='/addbook/popularbook'"> Top books </button>
+{% endblock%}

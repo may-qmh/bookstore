@@ -179,9 +179,8 @@
       }
     }
     function check_account(username) {
-        
-        return $http.post('/account/'+username, {
-          username: username,
+
+        return $http.post('/account/user/', {
         }).then(checkSuccessFn, checkErrorFn);
 
         /**
@@ -190,6 +189,7 @@
         */
         function checkSuccessFn(data, status, headers, config) {
           console.log("success check");
+          console.log(data)
           window.location = '/account/'+username;
         }
 

@@ -3,9 +3,11 @@ import json
 from rest_framework import status, views, permissions, viewsets
 from rest_framework.response import Response
 from books.models import Book, BookOrdered, Feedback, OrderHistory, UsefulnessRating
+from authentication.models import Account
 from django.shortcuts import render
 from rest_framework import status, views, permissions
 from django.contrib.staticfiles.templatetags.staticfiles import static
+from authentication.forms import UsefulnessForm
 
 class SearchView(views.APIView):
     def post(self, request, format=None):
@@ -32,21 +34,40 @@ class HomeView(views.APIView):
 
 class BookView(views.APIView):
     def post(self, request, format=None):
-        data = json.loads(request.body)
+        username = request.user
+        account = Account.objects.filter(username=username)
 
-        isbn10 = data.get('isbn10', None)
-        isbn10 = str(isbn10)
-        if len(isbn10)!=10:
-            diff = 10-len(isbn10)
-            isbn10="0"*diff+isbn10
-        print "test post"
-        print isbn10
+       
+        form = UsefulnessForm(request.POST)
+    
+        if form.is_valid():
+            
+            score = request.POST['score']
+            isbn10 = request.POST['ISBN10']
+            ratee = request.POST['rating_on']
+            
 
-        return Response(status=status.HTTP_204_NO_CONTENT)
+        #not sure
+            feedback = Feedback.objects.filter(login_id=ratee).get(isbn10=isbn10)
+
+            
+
+            rating = UsefulnessRating(usefulness=score, rater=account[0], ratee=feedback.login, isbn10=feedback.isbn10)
+        
+            try:
+                rating.full_clean() #checks if rater==ratee
+                rating.save()
+                #return HttpResponseRedirect('/books/' + feedback.book.isbn)
+            except Exception as e:
+                raise Http404('invalid')
+        else:
+            print "Usefulness form input invalid"
+
+        return render(request,'book_info.html',{})
 
     def get(self, request, isbn10):
         print "test bookview"
-
+        form = UsefulnessForm()
         isbn10 = str(isbn10)
         if len(isbn10)!=10:
             diff = 10-len(isbn10)
@@ -55,7 +76,7 @@ class BookView(views.APIView):
         bookinfo = Book.objects.get(pk=isbn10)
         feedback = Feedback.objects.filter(isbn10=isbn10)
         fbnum = len(feedback)
-        return render(request,'book_info.html',{'bookinfo':bookinfo, 'feedback': feedback, 'fbnum': fbnum})
+        return render(request,'book_info.html',{'bookinfo':bookinfo, 'feedback': feedback, 'fbnum': fbnum, 'form':form})
 
 class ConfirmationView(views.APIView):
     permission_classes = (permissions.IsAuthenticated,)
@@ -92,5 +113,27 @@ class ConfirmationView(views.APIView):
             diff = 10-len(isbn10)
             isbn10="0"*diff+isbn10
 
-        bookinfo = Book.objects.get(pk=isbn10)
-        return render(request,'confirmation.html',{bookinfo:bookinfo})
+        #bookordered query sets with isbn10
+        # book_order = BookOrdered.objects.filter(isbn10=isbn10)
+        # oid = []
+        # orders = []
+        # book_buyer=[]
+
+        #save all oids
+        # for order in book_order:
+        #     oid.append(order.oid)
+        # #use oids to get orderhistory info
+        # for o in oid:
+        #     orders.append(OrderHistory.filter(oid=o))
+
+        # #from orderhistoryinfo find users
+        # for order in orders:
+        #     all_buyer.append(order.filter(oid=order))
+
+
+        # for user in all_buyer:
+
+        # all_orders = OrderHistory.objects.get(login = book_buyer)
+        # for i in all_orders:
+
+        return render(request,'confirmation.html',{})

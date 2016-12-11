@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+
+<html ng-app="thinkster">
+<head>
+  <title>thinkster-django-angular-boilerplate</title>
+
+  <base href="/" />
+
+  {% include 'stylesheets.html' %}
+</head>
+
+<body >
+  {% include 'navbar.html' %}
+    <div class="container">
+  		
+    	<div class="well">
+    		<h3>Inventory</h3>
+    		
+    		{%block content%}
+    		<div class="scroll-review smallmarg">
+				<table class="ftable">
+					<tr>
+						<th> S/N. </th>
+						<th> isbn10	 </th>
+						<th> title </th>
+						<th> authors </th>
+						<th> publisher </th>	
+						<th> year </th>
+						<th> stock </th>
+						<th> price </th>
+						<th> format </th>
+						<th> keyword </th>
+						<th> subject </th>
+						
+					</tr>
+					{% for entry in data %}
+					<tr>
+						<td>{{entry.id}}</td>
+						<td>{{entry.isbn10}}</td>
+						<td>{{entry.title}}</td>
+						<td>{{entry.authors}}</td>
+						<td>{{entry.publisher}}</td>
+						<td>{{entry.year}}</td>
+						<td>{{entry.stock}}</td>
+						<td>{{entry.price}}</td>
+						<td>{{entry.format}}</td>
+						<td>{{entry.keyword}}</td>
+						<td>{{entry.subject}}</td>
+
+					</tr>
+					{% endfor %}
+
+				</table>
+				
+				<p>
+			</div>
+			<div class="row smallmarg">
+				<div class="col-md-6">
+				</div>
+				<div class="col-md-2">
+					<button id="add" class="btn" onclick = "location.href='/store_info/add/'"> Add new book </button>
+				</div>
+				<div class="col-md-2 tar">
+					<button id="edit" class="btn" onclick = "location.href='/store_info/edit/'"> Edit book </button>
+				</div>
+				<div class="col-md-2 tac">
+					<button id="top" class="btn" onclick = "location.href='/store_info/popularbook/'"> Top books </button>
+				</div>
+			</div>
+				
+				
+				
+			{% endblock%}
+		
+    	</div>
+    </div>
+  {% include 'javascripts.html' %}
+</body>
+</html>

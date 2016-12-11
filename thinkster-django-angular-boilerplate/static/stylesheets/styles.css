@@ -151,3 +151,83 @@ body{
     width: 25px !important;
 
 }
+
+.inventory{
+    overflow-x: hidden;
+    overflow-y: auto;
+    height: 380px !important;
+}
+
+.ftable th, .stats th{
+    background-color:#e3d6a5;
+}
+
+.ftable tr:nth-child(even),.stats tr:nth-child(even){background-color: #f2f2f2}
+
+.smallmarg{
+    margin-top: 2%
+}
+
+.ftable tr + tr, .stats tr + tr {
+    counter-increment: rowNumber+1;
+}
+
+.ftable tr:not(.fble_htr) td:first-child::before, .stats tr:not(.fble_htr) td:first-child::before {
+    content: counter(rowNumber);
+    min-width: 1em;
+    margin-right: 0.5em;
+}
+.ftable th, .ftable td, .stats th, .stats td{
+    padding: 10px 5px;
+    text-align: left;
+    border:1px solid #ddd;
+}
+
+.ftable{
+    margin-left:15px;
+    margin-right:15px;
+}
+
+#add,#edit,#top, #new, #back, #up, #stats, #feedb{
+    border:1px solid #ddd;
+    box-shadow: 1px 1px 1px #888888;
+}
+
+.addtable{
+    margin-left:40px;
+}
+.addtable th, .addtable td, .etable th, .etable td, .stats th, .stats td{
+    padding:  5px;
+    text-align: left;
+   
+}
+
+.leftmarg{
+    margin-left: 20px;
+}
+
+.margauto{
+    margin-left: 17%
+}
+
+.addbook{
+    width:40%;
+    margin:auto;
+}
+
+.etable{
+    margin-top:20px;
+}
+
+.stable{
+    margin-left:5%;
+    margin-top:1%;
+    overflow-x: hidden;
+    overflow-y: auto;
+    height: 250px !important;
+    width: 80%;
+}
+
+.acc{
+    height: 510px;
+}

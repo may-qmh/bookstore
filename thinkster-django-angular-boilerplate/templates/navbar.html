@@ -83,13 +83,13 @@
       <ul class="nav navbar-nav pull-right">
         {% if user.is_authenticated %}
           {% if user.is_admin %}
-            <li><a href="/+{{user.is_admin}}">Store Info</a></li>
+            <li><a href="/store_info/">Store Info</a></li>
           {% else %}
             <li><a href="/+cart"><div class="glyphicon glyphicon-shopping-cart">Cart</div></a></li>
           {% endif %}
-          <li role="presentation" class="dropdown"><a  class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" href="/+{{ user.username }}">+{{ user.username }} <span class="caret"></span></a>
+          <li role="presentation" class="dropdown"><a  class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" href="javascript:void(0)">+{{ user.username }} <span class="caret"></span></a>
             <ul class="dropdown-menu dropdown-menu-right" >
-              <li><a href="javascript:void(0)" ng-click="vm.check_account()">My Account</a></li>
+              <li><a href="/account/{{user.username}}">My Account</a></li>
               <li><a href="javascript:void(0)" ng-click="vm.logout()">Logout</a></li>
               <li><a href="#">Order History</a></li>
               <li role="separator" class="divider"></li>

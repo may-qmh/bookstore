@@ -88,7 +88,7 @@
 						</div>
 						<div class="row">
 							<div class="col-md-1"></div>
-					  		<div class="col-md-9 reviewer opinion">Is this review helpful? <a href="javascript:void(0)">Help to rate this feedback!</a></div>
+					  		<div class="col-md-9 reviewer opinion">Is this review helpful? <a href="javascript:void(0)" class="announce" data-id="{{bookinfo.isbn10}}/*{{bookinfo.title}}/*{{fb.login_id}}" data-target="#usefulnessModal">Help to rate this feedback!</a></div>
 				  			
 						</div>
 				    {%endfor%}
@@ -114,7 +114,7 @@
 	      <div class="modal-body">
 	      	<div class="well">
 	      	<div>Book: {{bookinfo.title}}</div>
-	      	<div>Written By: {{bookinfo.author}}</div>
+	      	<div>Written By: {{bookinfo.authors}}</div>
 	        <div>Currently in stock: {{bookinfo.stock}}</div>
 	        <div>Price: ${{bookinfo.price}}0</div>
 	        	<label>Order Quantity: </label>
@@ -131,6 +131,58 @@
 
 	  </div>
 	</div>
+
+
+
+	<div id="usefulnessModal" class="modal fade" role="dialog">
+	  <div class="modal-dialog">
+
+	    <!-- Modal content-->
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <button type="button" class="close" data-dismiss="modal">&times;</button>
+	        <h4 class="modal-title">Rate Usefulness of Feedback</h4>
+	        <h5>Please give this feedback a score of 0, 1, or 2 (’useless’, ’useful’, ’very useful’ respectively). (</h5>
+	      </div>
+	      <div class="modal-body">
+	      	<div class="well">
+	      	{% block content %}
+			
+			<form role="form" action="" method="post">
+			    {% csrf_token %}	
+				<table class="addtable">
+			    {{ form.as_table }}
+				</table>
+				<p>
+
+			
+			{% endblock %}
+
+	    </div>
+	      </div>
+	      <div class="modal-footer">
+	        <div class="form-group">
+	          <button class="btn btn-primary pull-right"  type="submit">RATE USER FEEDBACK</button>
+	        </div>
+	      </div>
+	      </form>
+	    </div>
+
+	  </div>
+	</div>
   {% include 'javascripts.html' %}
+  <script>
+		$(document).ready(function(){
+			$(".announce").click(function(){
+				var text = $(this).data('id')
+				var book = text.split("/*")
+				$("#id_ISBN10").val(book[0]);
+				$("#id_title").val(book[1]);
+				$("#id_rating_on").val(book[2]);
+
+				$("#usefulnessModal").modal('show');
+			});
+		});
+	</script>
 </body>
 </html>

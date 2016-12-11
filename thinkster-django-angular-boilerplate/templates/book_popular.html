@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+
+<html ng-app="thinkster">
+<head>
+  <title>thinkster-django-angular-boilerplate</title>
+
+  <base href="/" />
+
+  {% include 'stylesheets.html' %}
+</head>
+
+<body ng-Controller="AdminController">
+  {% include 'navbar.html' %}
+			
+
+			
+	
+    <div class="container">
+  		
+    	<div class="well" id="tabs">
+    		{% block content %}
+    		<h1>Statistics</h1>
+    		<ul class="nav nav-tabs">
+			  <li ng-class="{active: tab1}" ng-click="tabbed(1)"><a data-toggle="tab" href="#pop_book">Books</a></li>
+			  <li ng-class="{active: tab2}" ng-click="tabbed(2)"><a data-toggle="tab" href="#pop_author">Authors</a></li>
+			  <li ng-class="{active: tab3}" ng-click="tabbed(3)"><a data-toggle="tab" href="#pop_publisher">Publishers</a></li>
+			</ul>
+			<div class="container">
+				<div class="tab-content">
+				<!--########### BOOK ################-->
+				  <div id="pop_book" class="tab-pane fade" ng-class="{active: tab1, in: tab1 }">
+				  	  <h3> TOP Books </h3>			  	  
+					{% if data %}
+					<h5> Retrieved top {{data|length}} book orders.</h5>
+					{% else %}
+					<h5> None retrieved for this month </h5>
+					{% endif %}		
+					<div class="stable">		
+						
+					  <table class="stats">
+						<tr>
+							<th> rank </th>
+							<th> month </th>
+							<th> isbn10 </th>
+							<th>title      </th>
+							<th> authors	 </th>
+							<th> publisher	 </th>
+							<th> quantity </th>
+						</tr>
+						{% for video in data %}
+						<tr>
+							<td> </td>
+							<td>{{video.date}}</td>
+							<td>{{video.isbn10}}</td>	
+							<td>{{video.title}}</td>
+							<td>{{video.authors}}</td>
+							<td>{{video.publisher}}</td>
+							<td>{{video.quantity}}</td>
+
+
+						</tr>
+
+						{% endfor %}
+
+					</table>
+				</div>
+					<div class="row smallmarg">
+				  	  		<form role="form" action="" method="post">
+				  	  			<div class="col-md-6">
+				  	  			</div>
+							<div class="col-md-3">
+								{% csrf_token %}
+							
+							{{ form.as_p }}
+							</div>
+							<div class="col-md-3">
+								<button class="btn" id = 'stats' type="submit">Get Stats</button>
+							</div>
+							</form>
+						</div>
+
+				  </div>
+
+			<!--########### AUTHOR ################-->
+				  <div id="pop_author" class="tab-pane fade"  ng-class="{active: tab2, in: tab2}">
+				  	<h3>Top authors </h3>
+				  	{% if authors_count %}
+					<h5> Retrieved top {{authors_count|length}} authors.</h5>
+					{% else %}
+					<h5> None retrieved for this month. </h5>
+					{% endif %}	
+					<div class="stable">
+					<table class="stats">
+						<tr>
+							<th> rank </th>
+							<th> author </th>
+							<th> quantity </th>
+						</tr>
+						{% for key in authors_count %}
+						<tr>
+							<td> </td>
+							<td>{{key.0}}</td>
+							<td>{{key.1}}</td>
+						</tr>
+						{% endfor %}		
+					
+					</table>
+					</div>
+				<div class="row smallmarg">
+				  	  		<form role="form" action="" method="post">
+				  	  			<div class="col-md-6">
+				  	  			</div>
+							<div class="col-md-3">
+								{% csrf_token %}
+							
+							{{ form.as_p }}
+							</div>
+							<div class="col-md-3">
+								<button class="btn" id = 'stats' type="submit">Get Stats</button>
+							</div>
+							</form>
+						</div>
+
+				  </div>
+
+
+			<!--########### PUBLISHER ################-->
+				  <div id="pop_publisher" class="tab-pane fade"  ng-class="{active: tab3, in: tab3}">
+				  	<h3>Top publishers </h3>
+				  	{% if publisher_count %}
+					<h5> Retrieved top {{publisher_count|length}} authors.</h5>
+					{% else %}
+					<h5> None retrieved for this month. </h5>
+					{% endif %}	
+					<div class="stable">
+					<table class="stats">
+						<tr>
+							<th> rank </th>
+							<th> publisher </th>
+							<th> quantity </th>
+						</tr>
+
+						{% for key in publisher_count %}
+						<tr>
+							<td> </td>
+							<td>{{key.0}}</td>
+							<td>{{key.1}}</td>
+
+						</tr>
+						{% endfor %}		
+					
+					</table>	
+					</div>
+					<div class="row smallmarg">
+				  	  		<form role="form" action="" method="post">
+				  	  			<div class="col-md-6">
+				  	  			</div>
+							<div class="col-md-3">
+								{% csrf_token %}
+							
+							{{ form.as_p }}
+							</div>
+							<div class="col-md-3">
+								<button class="btn" id = 'stats' type="submit">Get Stats</button>
+							</div>
+							</form>
+						</div>
+
+				  </div>
+
+				  </div>
+				</div>
+			</div>
+    		
+			
+
+			
+			
+
+		{% endblock %}
+
+</div>
+    </div>
+  {% include 'javascripts.html' %}
+</body>
+
+</html>

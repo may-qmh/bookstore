@@ -39,7 +39,7 @@
       templateUrl: 'templates/book_info.html'
     })
     .when('/account/',{
-      controller: 'UserInfoController',
+      controller: 'NavBarController',
       controllerAs: 'vm',
       templateUrl: 'templates/user_info.html'
     })
@@ -48,6 +48,13 @@
       controllerAs: 'vm',
       templateUrl: 'templates/confirmation.html'
     })
+    .when('/store_info/',{
+      templateUrl: 'templates/adminpage.html'
+    })
+    .when('/store_info/add/',{
+      templateUrl: 'templates/addbook.html'
+    })
+
     .otherwise('/');
 
     

@@ -9,12 +9,12 @@
     .module('thinkster.layout.controllers')
     .controller('NavbarController', NavbarController);
 
-  NavbarController.$inject = ['$scope', 'Authentication', 'ShareVar'];
+  NavbarController.$inject = ['$scope', 'Authentication', 'ShareVar', '$cookies'];
 
   /**
   * @namespace NavbarController
   */
-  function NavbarController($scope, Authentication, ShareVar) {
+  function NavbarController($scope, Authentication, ShareVar, $cookies) {
     var vm = this;
 
     vm.logout = logout;
@@ -35,12 +35,16 @@
       var title = vm.bk_title;
       var subject = vm.subject;
       console.log(ShareVar);
+
       ShareVar.search_books(vm.author,vm.publisher,vm.bk_title,vm.subject);
     }
 
     function check_account(username){
       console.log("checking account");
-      Authentication.check_account(username);
+      console.error(username)
+
+
+      //Authentication.check_account();
     }
   }
 })();
