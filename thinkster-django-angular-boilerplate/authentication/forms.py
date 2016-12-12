@@ -66,8 +66,15 @@ class UsefulnessForm(forms.Form):
 )   
     score = forms.IntegerField(min_value=0,max_value=2)
 
-class AdvanceSearchForm(forms.ModelForm):
-    class Meta:
-        model = Book 
-        fields = ('authors','publisher','title','subject',)
-        
+class AdvanceSearchForm(forms.Form):
+    title = forms.CharField(required=False)
+    authors = forms.CharField(required=False)
+    publisher = forms.CharField(required=False)
+    subject = forms.CharField(required=False)
+    # class Meta:
+    #     model = Book 
+    #     fields = ('authors','publisher','title','subject',)
+
+
+class UsefulFeedbackForm(forms.Form):
+    top_n = forms.IntegerField(min_value=1,max_value=500)

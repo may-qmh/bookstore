@@ -11,6 +11,48 @@
 
 <body>
   {% include 'navbar.html' %}
+  	  <!-- Modal -->
+	<div id="feedbackModal" class="modal fade" role="dialog">
+	  <div class="modal-dialog">
+
+	    <!-- Modal content-->
+	    <div class="modal-content">
+	    	<form role="form" action="" method="post">
+	      <div class="modal-header">
+	        	<button type="button" class="close" data-dismiss="modal">&times;</button>
+	        	<h4 class="modal-title"> <strong>Feedback</strong></h4>
+	        	<h5>Please enter your feedback for <span id="BookId"></span><span id="Title"></span> here. Give it a score from 0 (terrible) to 10 (wonderful).</h5>
+	      </div>
+	      <div class="modal-body">
+		      	<div class="well">
+		      	
+				
+				
+				    {% csrf_token %}	
+					<table class="addtable">
+				    {{ form.as_table }}
+					</table>
+					<p>
+
+				
+				
+
+				   
+			      
+	      		
+	   			 </div>
+
+	  </div>
+	  <div class="modal-footer">
+        <div class="form-group">
+          <button class="btn btn-primary pull-right"  type="submit">FEEDBACK</button>
+        </div>
+	  </div>
+	  </form>
+	      		
+	</div>
+</div>
+</div>
   	<div class="container">
 		<div class="well">
 			<div class="acc">
@@ -86,7 +128,7 @@
 			  	<div class="leftmarg topmarg">
 			  		<h1>Order History</h1>
 			  	</div>
-			  	<div class="addtable smallmarg">
+			  	<div class="addtable smallmarg utable">
 				  	<table class="ftable">
 				  		<tr>
 				  			<th>S/N.</th>
@@ -123,7 +165,7 @@
 
 			  <div id="fh" class="tab-pane fade">
 			  	<div class="leftmarg topmarg"><h1>Feedback</h1></div>
-			  	<div class="addtable smallmarg">
+			  	<div class="addtable smallmarg utable">
 				  	<table class="ftable">
 				  		<tr>
 				  			<th>S/N.</th>
@@ -155,7 +197,7 @@
 
 			   <div id="uh" class="tab-pane fade">
 					<div class="leftmarg topmarg"><h1>Ratings</h1></div>
-					<div class="addtable smallmarg">
+					<div class="addtable smallmarg utable">
 					  	<table class="ftable">
 					  		<tr>
 					  			<th>S/N.</th>
@@ -206,52 +248,12 @@
 		</div>
 	</div>
 
-	  <!-- Modal -->
-	<div id="feedbackModal" class="modal" role="dialog">
-	  <div class="modal-dialog">
-
-	    <!-- Modal content-->
-	    <div class="modal-content">
-	      <div class="modal-header">
-	        	<button type="button" class="close" data-dismiss="modal" >&times;</button>
-	        	<h4 class="modal-title"> <strong>Feedback</strong></h4>
-	        	<h5>Please enter your feedback for <span id="BookId"></span><span id="Title"></span> here. Give it a score from 0 (terrible) to 10 (wonderful).</h5>
-	      </div>
-	      <div class="modal-body">
-		      	<div class="well">
-		      	{% block content %}
-				
-				<form role="form" action="" method="post">
-				    {% csrf_token %}	
-					<table class="addtable">
-				    {{ form.as_table }}
-					</table>
-					<p>
-
-				
-				
-
-				   
-			      <div class="modal-footer">
-			        <div class="form-group">
-			          <button class="btn btn-primary pull-right"  type="submit">FEEDBACK</button>
-			        </div>
-			      </div>
-	      		</form>
-	      		{% endblock %}
-	   			 </div>
-
-	  </div>
-	</div>
 
   {% include 'javascripts.html' %}
   	<script>
-  		
 		$(document).ready(function(){
 			$(".feed").click(function(){
-				$('#usefulnessModal').modal('hide')
-				$('#orderModal').modal('hide')
-				$('#feedbackModal').modal('hide')
+				console.log("I AM TESTING FEEDBACK MODAL")
 				var text = $(this).data('id')
 				var book = text.split("/*")
 				$("#id_ISBN10").val(book[0]);
@@ -262,7 +264,6 @@
 				$("#feedbackModal").modal('show');
 			});
 		});
-
 	</script>
 </body>
 </html>

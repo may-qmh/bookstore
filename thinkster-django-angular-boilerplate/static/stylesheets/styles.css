@@ -195,6 +195,7 @@ body{
 
 .addtable{
     margin-left:40px;
+    height:400px;
 }
 .addtable th, .addtable td, .etable th, .etable td, .stats th, .stats td{
     padding:  5px;
@@ -228,6 +229,14 @@ body{
     width: 80%;
 }
 
+.utable{
+    margin-left:5%;
+    margin-top:1%;
+    overflow-x: hidden;
+    overflow-y: auto;
+    height: 300px !important;
+    width: 80%;
+}
 .acc{
     height: 510px;
 }
@@ -249,4 +258,14 @@ body{
 }
 #tbl{
     cursor: pointer;
+}
+
+#topn{
+    padding:5px !important;
+    margin:0 !important;
+    margin-bottom: 3px;
+    color: black !important;
+    background-color: rgba(255,255,255,0.9);
+    border:1px solid #ddd;
+
 }

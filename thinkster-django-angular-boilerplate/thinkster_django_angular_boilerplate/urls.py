@@ -32,7 +32,7 @@ urlpatterns = patterns(
 
     url(r'^account/([a-zA-Z0-9-]+)$', authentication.views.user_account, name='user_info'),
 
-    url(r'^confirmation/([a-zA-Z0-9-]+)$', recommendations, name='user_info'),
+    url(r'^confirmation/([a-zA-Z0-9-]+)$', ConfirmationView.as_view(), name='user_info'),
 
     url(r'^store_info/add/$', authentication.views.book_new, name='bookNew'),
 
