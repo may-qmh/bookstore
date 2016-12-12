@@ -195,8 +195,7 @@ body{
 
 .addtable{
     margin-left:40px;
-    height:400px;
-}
+    }
 .addtable th, .addtable td, .etable th, .etable td, .stats th, .stats td{
     padding:  5px;
     text-align: left;
@@ -260,7 +259,7 @@ body{
     cursor: pointer;
 }
 
-#topn{
+#topn, #editbtn{
     padding:5px !important;
     margin:0 !important;
     margin-bottom: 3px;
@@ -268,4 +267,9 @@ body{
     background-color: rgba(255,255,255,0.9);
     border:1px solid #ddd;
 
+}
+
+.atable{
+    margin-left:40px;
+    height:400px;
 }

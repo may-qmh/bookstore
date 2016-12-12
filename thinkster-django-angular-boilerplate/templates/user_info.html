@@ -32,14 +32,8 @@
 					<table class="addtable">
 				    {{ form.as_table }}
 					</table>
-					<p>
+					
 
-				
-				
-
-				   
-			      
-	      		
 	   			 </div>
 
 	  </div>
@@ -119,7 +113,16 @@
 			  		<div class="col-md-3">
 			  			<div>{{ account_info.phone }}</div>
 			  		</div>
-			  	</div>					
+			  	</div>
+			  	<div class="row smallmarg">
+			  		<div class="col-md-4">
+			  		</div>
+			  		<div class="col-md-2">
+			  			<button id="editbtn" type="button" class="btn btn-default" onclick = "location.href='/edit/'">Edit</button>	
+			  		</div>
+			  		
+			  	</div>
+			  				
 			  </div>
 
 
@@ -128,7 +131,7 @@
 			  	<div class="leftmarg topmarg">
 			  		<h1>Order History</h1>
 			  	</div>
-			  	<div class="addtable smallmarg utable">
+			  	<div class="atable smallmarg utable">
 				  	<table class="ftable">
 				  		<tr>
 				  			<th>S/N.</th>
@@ -165,7 +168,7 @@
 
 			  <div id="fh" class="tab-pane fade">
 			  	<div class="leftmarg topmarg"><h1>Feedback</h1></div>
-			  	<div class="addtable smallmarg utable">
+			  	<div class="atable smallmarg utable">
 				  	<table class="ftable">
 				  		<tr>
 				  			<th>S/N.</th>
@@ -197,7 +200,7 @@
 
 			   <div id="uh" class="tab-pane fade">
 					<div class="leftmarg topmarg"><h1>Ratings</h1></div>
-					<div class="addtable smallmarg utable">
+					<div class="atable smallmarg utable">
 					  	<table class="ftable">
 					  		<tr>
 					  			<th>S/N.</th>

@@ -54,6 +54,9 @@
     .when('/store_info/add/',{
       templateUrl: 'templates/addbook.html'
     })
+    .when('/edit/',{
+      templateUrl: 'templates/user_edit.html'
+    })
 
     .otherwise('/');
 

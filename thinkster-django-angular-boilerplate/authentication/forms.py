@@ -1,5 +1,6 @@
 from django import forms
 from books.models import Book, OrderHistory, Feedback
+from authentication.models import Account
 
 class AddBookForm(forms.ModelForm):
 
@@ -78,3 +79,8 @@ class AdvanceSearchForm(forms.Form):
 
 class UsefulFeedbackForm(forms.Form):
     top_n = forms.IntegerField(min_value=1,max_value=500)
+
+class EditAccountForm(forms.ModelForm):
+    class Meta:
+        model = Account
+        fields = ('full_name','credit_card','address','phone')

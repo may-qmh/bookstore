@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+
+<html ng-app="thinkster">
+<head>
+  <title>thinkster-django-angular-boilerplate</title>
+
+  <base href="/" />
+
+  {% include 'stylesheets.html' %}
+</head>
+
+<body>
+  {% include 'navbar.html' %}
+  			<div class="container">	
+				<div class="well">
+					<h3>{{msg}}</h3>
+				
+		      	{% block content %}
+				<form role="form" action="" method="post">
+				
+				    {% csrf_token %}	
+					<table class="addtable">
+				    {{ form.as_table }}
+					</table>
+					<p>
+
+				<button type="submit">Update</button>
+				</form>
+				{% endblock %}
+				
+		    	</div>
+		   </div>
+
+  {% include 'javascripts.html' %}
+  
+</body>
+</html>

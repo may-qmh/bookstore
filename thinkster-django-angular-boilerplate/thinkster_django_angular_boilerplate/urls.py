@@ -38,6 +38,7 @@ urlpatterns = patterns(
 
     url(r'^store_info/edit/$', authentication.views.book_edit, name='bookEdit'),
 
+    url(r'^edit/$', authentication.views.account_edit, name='accEdit'),
 
     url(r'^store_info/popularbook/$', authentication.views.book_popular, name='bookPopular'),
 

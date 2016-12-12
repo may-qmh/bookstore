@@ -12,7 +12,7 @@ from django.shortcuts import render
 
 from .forms import AddBookForm, EditBookForm, SearchBookForm, FilterBookForm
 from operator import itemgetter
-from authentication.forms import AddBookForm, EditBookForm, SearchBookForm, FilterBookForm, FeedbackForm
+from authentication.forms import AddBookForm, EditBookForm, SearchBookForm, FilterBookForm, FeedbackForm, EditAccountForm
 from books.models import *
 
 class AccountViewSet(viewsets.ModelViewSet):
@@ -278,3 +278,43 @@ def check_feedback(isbn10,login_id):
         return True
     return False
 
+def account_edit(request):
+    #need to get username of current user
+    username = request.user
+    acc = Account.objects.filter(username=username)
+    msg="Edit your account information here!"
+    form = EditAccountForm(request.POST)
+    if request.method == 'POST':
+        print "editing account"
+        if form.is_valid():
+            fullname = request.POST['full_name']
+            credit = request.POST['credit_card']
+            address = request.POST['address']
+            phone = request.POST['phone']
+            
+            
+            print fullname
+            print credit
+            print address
+            print phone
+            try:
+                if len(fullname) != 0:
+                    acc.update(full_name=fullname)
+                if len(credit) != 0:
+                    acc.update(credit_card=credit)
+                if len(address) != 0:
+                    acc.update(address=address)
+                if len(phone) != 0:
+                    acc.update(phone=phone)
+                
+                msg="Edit Successful!"
+            except:
+                msg="Edit Failed! Please try again."
+    else:
+        print "else"
+        msg = "Edit your account information here!"
+        form = EditAccountForm(initial={'full_name': acc[0].full_name, 'credit_card': acc[0].credit_card, 'address': acc[0].address, 'phone': acc[0].phone})
+    return render(request, 'user_edit.html', {
+            'form':form, 'msg':msg
+            
+        })
