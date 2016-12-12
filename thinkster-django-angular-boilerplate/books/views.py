@@ -9,7 +9,7 @@ from rest_framework import status, views, permissions
 from django.contrib.staticfiles.templatetags.staticfiles import static
 from authentication.forms import UsefulnessForm, AdvanceSearchForm, UsefulFeedbackForm
 from collections import Counter
-
+from django.db.models import Q
 
 class SearchView(views.APIView):
     def post(self, request, format=None):
@@ -175,8 +175,10 @@ def book_search(request):
     queries = []
     temp = Book.objects.all()
     if request.method == 'GET' :
+        print "basic search"
         form = AdvanceSearchForm(request.GET)
         if form.is_valid():
+
             authors = form.cleaned_data['authors']
             queries.append(authors)
             publisher = form.cleaned_data['publisher']
@@ -204,8 +206,11 @@ def book_search(request):
          
             
     else:
+        search = request.POST.get('search',False)
+        query = Q(title__icontains=search) | Q(authors__icontains=search) | Q(publisher__icontains=search) | Q(keyword__icontains=search) | Q(subject__icontains=search) 
+        data = Book.objects.filter(query)
         form = AdvanceSearchForm()
-    
+        
     return render(request, 'advance_search.html', {'form' :form, 'data':data})
 def get_score(isbn10):
     data = Feedback.objects.filter(isbn10=isbn10)

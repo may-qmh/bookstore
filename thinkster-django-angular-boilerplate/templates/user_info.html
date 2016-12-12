@@ -144,7 +144,7 @@
 							<tr>
 								<td> </td>
 								<td>{{ orderhistory.order_date }}</td>
-								<td>{{ book.title }}</td>
+								<td><a href="/book/{{book.isbn10}}">{{ book.title }}</a></td>
 								<td>{{ book.price }}</td>
 								<td>{{ book_ordered.0.quantity }}</td>
 								{% if isFB %}
@@ -179,7 +179,7 @@
 					  		<tr>
 								<td> </td>
 								<td>{{ feedback.entry_date }}</td>
-								<td>{{ book.title }}</td>
+								<td><a href="/book/{{book.isbn10}}">{{ book.title }}</a></td>
 								<td>{{ feedback.score }}</td>
 								<td>{{ feedback.opinion }}</td>
 							</tr>
@@ -211,7 +211,7 @@
 								{% for rating, customer_ratee, book, feedback in ratings %}
 						  		<tr>
 									<td> </td>
-									<td>{{ book.title }}</td>
+									<td><a href="/book/{{book.isbn10}}">{{ book.title }}</a></td>
 									<td>{{ customer_ratee.username }}</td>
 									<td>{{ feedback.opinion }}</td>
 									<td>{{ rating.usefulness }}</td>
