@@ -7,7 +7,7 @@ from authentication.models import Account
 from django.shortcuts import render
 from rest_framework import status, views, permissions
 from django.contrib.staticfiles.templatetags.staticfiles import static
-from authentication.forms import UsefulnessForm
+from authentication.forms import UsefulnessForm, AdvanceSearchForm
 
 class SearchView(views.APIView):
     def post(self, request, format=None):
@@ -141,3 +141,96 @@ class ConfirmationView(views.APIView):
         # for i in all_orders:
 
         return render(request,'confirmation.html',{})
+
+#book search 
+def book_search(request):
+    data = []
+    queries = []
+    temp = Book.objects.all()
+    if request.method == 'GET' :
+        form = AdvanceSearchForm(request.GET)
+        if form.is_valid():
+            authors = form.cleaned_data['authors']
+            queries.append(authors)
+            publisher = form.cleaned_data['publisher']
+            queries.append(publisher)
+            title = form.cleaned_data['title']
+            queries.append(title)
+            subject = form.cleaned_data['subject']
+            queries.append(subject)
+            
+            for i in range(0,len(queries)):
+                if queries[i] != "":
+                    if i ==0:
+                        temp = temp.filter(authors__icontains = queries[i])
+                    elif i==1:
+                        temp = temp.filter(publisher__icontains = queries[i])
+                    elif i==2:
+                        temp = temp.filter(title__icontains = queries[i])
+                    else:
+                        temp = temp.filter(subject__icontains = queries[i])
+        
+
+            for entry in temp:
+                score = get_score(entry.isbn10)
+                data.append({'image':entry.image, 'isbn10':entry.isbn10, 'title':entry.title, 'authors':entry.authors, 'publisher':entry.publisher, 'year':entry.year, 'stock':entry.stock, 'price':entry.price, 'format':entry.format, 'keyword':entry.keyword, 'subject':entry.subject, 'score':score})
+         
+            
+    else:
+        form = AdvanceSearchForm()
+    
+    return render(request, 'advance_search.html', {'form' :form, 'data':data})
+def get_score(isbn10):
+    data = Feedback.objects.filter(isbn10=isbn10)
+    score =0
+    count =0
+    for entry in data:
+        score+= entry.score
+        count+=1
+    if count == 0:
+        return 0
+    else:
+        average_score= score/count
+
+        return average_score
+
+
+def recommendations(request, isbn10):
+    #user's order
+    username = request.user
+    print username
+    if len(isbn10)!=10:
+            diff = 10-len(isbn10)
+            isbn10="0"*diff+isbn10
+    book = Book.objects.get(isbn10=isbn10)
+
+    # queryset of all bookordered with this isbn10
+    orders = book.bookordered_set.all()
+
+    # get orderhistory
+    orderhistory = [ order.oid for order in orders ]
+
+    # get users who bought this book using oid
+    usernames =set(i.login_id for i in orderhistory)
+    usernames.remove(str(username))
+    # get all the oids of these users
+    # allorders: nested list of orderhistories
+    allorders = []
+    for i in usernames:
+        allorders.append(OrderHistory.objects.filter(login=i))
+
+    allorders = [ item for sublist in allorders for item in sublist ]
+
+    other_books = []
+    for i in allorders:
+        bookordered = BookOrdered.objects.filter(oid=i.oid)
+        for o in bookordered:
+            if o.isbn10.isbn10!=isbn10:
+                other_books.append((o.isbn10, o.quantity))
+
+    sortedlist = sorted(other_books, key=lambda tup:tup[1], reverse=True)
+    recommendedbooks = []
+    for i in sortedlist:
+        recommendedbooks.append(i[0])
+        print dir(i[0])
+    return render(request, 'confirmation.html', {'recommended':recommendedbooks})

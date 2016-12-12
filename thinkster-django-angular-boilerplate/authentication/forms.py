@@ -65,3 +65,9 @@ class UsefulnessForm(forms.Form):
     widget=forms.TextInput(attrs={'readonly':'readonly'})
 )   
     score = forms.IntegerField(min_value=0,max_value=2)
+
+class AdvanceSearchForm(forms.ModelForm):
+    class Meta:
+        model = Book 
+        fields = ('authors','publisher','title','subject',)
+        

@@ -11,12 +11,17 @@
 
 <body>
   {% include 'navbar.html' %}
-
-  <h4>Your Order Has Been Confirmed!</h4>
-  <h4>Here are some books recommended for you!</4>
-  <h5>Others who bought this also bought...</h5>
-  
-
+  <div class="container">
+  	<div class="well">
+	  <h4>Your Order Has Been Confirmed!</h4>
+	  <h4>Here are some books recommended for you!</4>
+	  <h5>Others who bought this also bought...</h5>
+	  
+	  {% for book in recommended %}
+	  <a href="/book/{{book.isbn10}}"> <img src="static/images/{{book.image}}" class="smallpic"> </a>
+	  {% endfor %}
+	</div>
+  </div>
   {% include 'javascripts.html' %}
 </body>
 </html>

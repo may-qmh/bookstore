@@ -232,3 +232,21 @@ body{
     height: 510px;
 }
 
+.margr{
+    margin-right: 30px;
+}
+
+.smallpic{
+    height:140px;
+    }
+.searcht{
+    margin-left:5%;
+    margin-top:1%;
+    overflow-x: hidden;
+    overflow-y: auto;
+    height: 470px;
+
+}
+#tbl{
+    cursor: pointer;
+}

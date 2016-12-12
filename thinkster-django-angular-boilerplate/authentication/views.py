@@ -238,6 +238,7 @@ def user_account(request,user):
 
     form = FeedbackForm(request.POST)
     if request.method == 'POST':
+        msg=""
         if form.is_valid():
             text = request.POST['opinion']
             score = request.POST['score']
